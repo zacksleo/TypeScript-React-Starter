@@ -1,0 +1,77 @@
+image: node:alpine
+
+before_script:
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" > ~/deploy.key
+    - chmod 0600 ~/deploy.key
+    - ssh-add ~/deploy.key
+    - mkdir -p ~/.ssh
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    - export APP_ENV=testing
+
+stages:
+    - prepare
+    - test
+
+variables:
+    NPM_CONFIG_CACHE: "/cache/npm"
+    YARN_CACHE_FOLDER: "/cache/npm"
+    DOCKER_DRIVER: overlay2
+build-cache:
+    stage: prepare
+    script:
+        - yarn install
+    cache:
+      key: "$CI_COMMIT_REF_NAME"
+      paths:
+        - node_modules
+    except:
+        - docs
+        - tags
+    when: manual
+    tags:
+        - mainland
+tslint:
+    stage: test
+    dependencies: []
+    cache:
+      key: "$CI_COMMIT_REF_NAME"
+      policy: pull
+      paths:
+        - node_modules
+    script:
+        - if [ ! -d "node_modules" ]; then
+        - yarn install
+        - fi
+        - yarn tslint -p ./
+    except:
+        - docs
+        - develop
+        - master
+        - tags
+    tags:
+        - mainland
+
+unit-test:
+    stage: test
+    dependencies: []
+    artifacts:
+        name: "debug"
+        when: on_failure
+        untracked: false
+        expire_in: 60 mins
+        paths:
+            - $CI_PROJECT_DIR/tests/
+    cache:
+      key: "$CI_COMMIT_REF_NAME"
+      paths:
+        - node_modules
+    script:
+        - if [ ! -d "vendor" ]; then
+        - yarn install
+        - fi
+        - yarn run test
+    except:
+        - docs
+    tags:
+        - mainland
