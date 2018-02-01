@@ -65,7 +65,7 @@ unit-test:
         - if [ ! -d "vendor" ]; then
         - yarn install --cache-folder /cache/yarn
         - fi
-        - yarn run test
+        - yarn run test --coverage
     except:
         - docs
     tags:
