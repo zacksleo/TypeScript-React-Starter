@@ -1,12 +1,6 @@
 image: node:alpine
 
 before_script:
-    - eval $(ssh-agent -s)
-    - echo "$SSH_PRIVATE_KEY" > ~/deploy.key
-    - chmod 0600 ~/deploy.key
-    - ssh-add ~/deploy.key
-    - mkdir -p ~/.ssh
-    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
     - export APP_ENV=testing
 
 stages:
