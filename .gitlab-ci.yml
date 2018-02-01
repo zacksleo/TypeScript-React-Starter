@@ -1,13 +1,8 @@
 image: node:alpine
 
 before_script:
-    - eval $(ssh-agent -s)
-    - echo "$SSH_PRIVATE_KEY" > ~/deploy.key
-    - chmod 0600 ~/deploy.key
-    - ssh-add ~/deploy.key
-    - mkdir -p ~/.ssh
-    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
     - export APP_ENV=testing
+    - yarn config set registry 'https://registry.npm.taobao.org'
 
 stages:
     - prepare
@@ -15,12 +10,12 @@ stages:
 
 variables:
     NPM_CONFIG_CACHE: "/cache/npm"
-    YARN_CACHE_FOLDER: "/cache/npm"
+    YARN_CACHE_FOLDER: "/cache/yarn"
     DOCKER_DRIVER: overlay2
 build-cache:
     stage: prepare
     script:
-        - yarn install
+        - yarn install --cache-folder /cache/yarn
     cache:
       key: "$CI_COMMIT_REF_NAME"
       paths:
@@ -41,7 +36,7 @@ tslint:
         - node_modules
     script:
         - if [ ! -d "node_modules" ]; then
-        - yarn install
+        - yarn install --cache-folder /cache/yarn
         - fi
         - yarn tslint -p ./
     except:
@@ -68,9 +63,9 @@ unit-test:
         - node_modules
     script:
         - if [ ! -d "vendor" ]; then
-        - yarn install
+        - yarn install --cache-folder /cache/yarn
         - fi
-        - yarn run test
+        - yarn run test --coverage
     except:
         - docs
     tags:
