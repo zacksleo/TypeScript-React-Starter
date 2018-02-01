@@ -9,7 +9,7 @@ stages:
 
 variables:
     NPM_CONFIG_CACHE: "/cache/npm"
-    YARN_CACHE_FOLDER: "/cache/npm"
+    YARN_CACHE_FOLDER: "/cache/yarn"
     DOCKER_DRIVER: overlay2
 build-cache:
     stage: prepare
@@ -35,7 +35,7 @@ tslint:
         - node_modules
     script:
         - if [ ! -d "node_modules" ]; then
-        - yarn install
+        - yarn install --cache-folder /cache/yarn
         - fi
         - yarn tslint -p ./
     except:
@@ -62,7 +62,7 @@ unit-test:
         - node_modules
     script:
         - if [ ! -d "vendor" ]; then
-        - yarn install
+        - yarn install --cache-folder /cache/yarn
         - fi
         - yarn run test
     except:
