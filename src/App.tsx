@@ -3,17 +3,20 @@ import './App.css';
 import 'normalize.css';
 import Header from './components/header';
 import Order from './components/order';
-import { Route } from 'react-router-dom';
+
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 class App extends React.Component {
-  render() {
-    return (
-      <div className="App">
-        <Header />
-        <Route path="/orders" component={Order}/>
-      </div>
-    );
-  }
+    render() {
+        return (
+            <Router>
+                <div>
+                    <Header/>
+                    <Route path="/orders" component={Order}/>
+                </div>
+            </Router>
+        );
+    }
 }
 
 export default App;
