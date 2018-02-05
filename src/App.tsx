@@ -1,16 +1,16 @@
 import * as React from 'react';
 import './App.css';
 import 'normalize.css';
-import Header from './components/header/Header';
-import Order from './components/order/Order';
-import PrivateRoute from './components/route/PrivateRoute';
+import Header from './components/header';
+import Order from './components/order';
+import { Route } from 'react-router-dom';
 
 class App extends React.Component {
   render() {
     return (
       <div className="App">
         <Header />
-        <PrivateRoute path="/orders" component={Order}/>
+        <Route path="/orders" component={Order}/>
       </div>
     );
   }
