@@ -25,10 +25,10 @@
 
 ### 创建组件, 在src/components中创建组件
 
-如 Oder 组件, 每个组件一个单独的目录, 里面存放组件类, 测试代码 及css等其他资源, 组件类的文件名与类名同名
+如 Oder 组件, 每个组件一个单独的目录, 里面存放组件类, 测试代码 及css等其他资源, 默认导出组件类为 index.ts/index.tsx
 
 ```
-// src/components/order/Order.tsx
+// src/components/Order/index.tsx
 
 
 ```
