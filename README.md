@@ -3,11 +3,11 @@
 
 ## 相关文档
 
-[TypeScript React Starter中文版](https://zhuanlan.zhihu.com/p/27847933)
-[TypeScript React Starter 官方](https://github.com/Microsoft/TypeScript-React-Starter)
-[create-react-app 中文版](https://github.com/XanthusL/create-react-app-zh)
-[create-react-app 官方](https://github.com/facebook/create-react-app)
-[Git工作流程及使用规范](https://mops-wiki.lianluo.com/guideline/Git%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E5%8F%8A%E4%BD%BF%E7%94%A8%E8%A7%84%E8%8C%83)
++ [TypeScript React Starter中文版](https://zhuanlan.zhihu.com/p/27847933)
++ [TypeScript React Starter 官方](https://github.com/Microsoft/TypeScript-React-Starter)
++ [create-react-app 中文版](https://github.com/XanthusL/create-react-app-zh)
++ [create-react-app 官方](https://github.com/facebook/create-react-app)
++ [Git工作流程及使用规范](https://mops-wiki.lianluo.com/guideline/Git%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E5%8F%8A%E4%BD%BF%E7%94%A8%E8%A7%84%E8%8C%83)
 
 
 ## 安装依赖
@@ -32,7 +32,16 @@
 
 
 ```
-### 编写测试 [可选]
+
+## 运行
+
+`yarn start`
+
+### 编写测试
+
+运行测试 `yarn run test`
+
+[参考文档](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#running-tests)
 
 ### 提交代码
 
