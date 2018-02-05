@@ -21,6 +21,12 @@
     "@types/react": "^16.0.36",
     "@types/react-dom": "^16.0.3",
     "@types/react-router-dom": "^4.2.3",
+    "cz-conventional-changelog": "^2.1.0",
     "typescript": "^2.7.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
